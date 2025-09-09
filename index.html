@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Nama Kamu – Linktree</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kumpulan link & kontakku | Semua ada di satu tempat.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Fahps – Linktree">
+  <meta property="og:description" content="Kumpulan link.">
+  <meta property="og:image" content="/gambr.png">
+  <meta property="og:type" content="website">
+  <!-- Favicon dinamis -->
+  <link id="favicon" rel="icon" href="/gambr.png">
+  <!-- Font Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Lineicons -->
+  <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet">
+  <style>
+  :root{
+    --grad-1:#6366f1;
+    --grad-2:#a855f7;
+    --blur:16px;
+    --radius:18px;
+    --text-light:#111827;
+    --text-dark:#f9fafb;
+    --card-light:rgba(255,255,255,.55);
+    --card-dark:rgba(28,28,32,.45);
+    --shadow:0 12px 30px -10px rgba(0,0,0,.25);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  html,body{height:100%}
+  body{display:flex;align-items:center;justify-content:center;padding:2rem 1rem;transition:background .4s,color .4s;overflow:hidden}
+  body.light{background:linear-gradient(120deg,#e0e7ff 0%,#d1d5f9 100%);color:var(--text-light)}
+  body.dark {background:linear-gradient(120deg,#0f0c29 0%,#302b63 50%,#24243e 100%);color:var(--text-dark)}
+  canvas#particles{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+  /* Toggle */
+  .theme-toggle{position:absolute;top:1.2rem;right:1.2rem;width:48px;height:48px;border-radius:50%;background:rgba(127,127,127,.15);border:none;cursor:pointer;backdrop-filter:blur(var(--blur));-webkit-backdrop-filter:blur(var(--blur));box-shadow:var(--shadow);transition:transform .2s}
+  .theme-toggle:hover{transform:scale(1.1) rotate(20deg)}
+
+  /* Wrapper */
+  .wrapper{position:relative;z-index:1;width:100%;max-width:420px;text-align:center}
+
+  /* Avatar */
+  .avatar-wrap{display:inline-block;position:relative;margin-bottom:.75rem}
+  .avatar{width:130px;height:130px;border-radius:50%;object-fit:cover;border:4px solid transparent;background:linear-gradient(white,white) padding-box,linear-gradient(45deg,var(--grad-1),var(--grad-2)) border-box;box-shadow:0 0 30px -5px var(--grad-1);transition:transform .3s}
+  .avatar:hover{transform:scale(1.05) rotate(-3deg)}
+  h1{font-size:1.7rem;font-weight:600;margin-bottom:.25rem}
+  .bio{font-size:.95rem;opacity:.8;margin-bottom:2.5rem}
+
+  /* Link Card Morphing */
+  .link-card{display:flex;align-items:center;gap:.9rem;width:100%;padding:1.1rem 1.4rem;margin:.7rem 0;border-radius:var(--radius);background:var(--card-light);color:inherit;text-decoration:none;backdrop-filter:blur(var(--blur));-webkit-backdrop-filter:blur(var(--blur));box-shadow:var(--shadow);transform:scale(1);transition:all .35s cubic-bezier(.25,1,.5,1)}
+  body.dark .link-card{background:var(--card-dark)}
+  .link-card i{font-size:1.45rem;width:28px;text-align:center;flex-shrink:0}
+  .link-title{flex:1;text-align:left;font-weight:600}
+  .link-card:hover{transform:scale(1.03) translateY(-4px);background:linear-gradient(45deg,var(--grad-1),var(--grad-2));color:#fff}
+  .link-card:active{transform:scale(.98);box-shadow:inset 0 0 15px rgba(0,0,0,.2)}
+
+  /* Sosmed */
+  .sosmed{margin-top:2rem;display:flex;justify-content:center;gap:.8rem}
+  .sosmed a{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:var(--card-light);color:var(--grad-1);backdrop-filter:blur(var(--blur));-webkit-backdrop-filter:blur(var(--blur));box-shadow:var(--shadow);transition:transform .2s,background .2s,color .2s}
+  body.dark .sosmed a{background:var(--card-dark)}
+  .sosmed a:hover{transform:scale(1.12);background:var(--grad-1);color:#fff}
+
+  footer{margin-top:2.5rem;font-size:.7rem;opacity:.55}
+
+  /* Animate on load */
+  .fade-up{animation:fadeUp .8s cubic-bezier(.25,1,.5,1) forwards;opacity:0}
+  @keyframes fadeUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+  </style>
+</head>
+<body class="light">
+  <canvas id="particles"></canvas>
+  <button class="theme-toggle" id="themeToggle" title="Ganti tema"><i class="lni lni-night-day"></i></button>
+
+  <div class="wrapper">
+    <div class="avatar-wrap fade-up">
+      <!-- GANTI FOTO -->
+      <img src="/gambr.png" alt="Foto" class="avatar">
+    </div>
+    <h1 class="fade-up delay-1">Arfah putra s</h1>
+    <p class="bio fade-up delay-2">✨ Built, not born.</p>
+
+    <div id="linkList"></div>
+
+    <div class="sosmed fade-up delay-4">
+      <a href="mailto:arfahputra25@gmail.com" title="Email"><i class="lni lni-envelope"></i></a>
+      <a href="https://github.com/YamNo" target="_blank" rel="noopener" title="GitHub"><i class="lni lni-github-original"></i></a>
+      <a href="https://twitter.com/raprapoylaah" target="_blank" rel="noopener" title="Twitter"><i class="lni lni-twitter-original"></i></a>
+    </div>
+
+    <footer class="fade-up delay-4">© <span id="yr"></span> Fahps</footer>
+  </div>
+
+  <script>
+  /*========= DATA LINK (GANTI DISINI) =========*/
+  const links=[
+    {icon:"lni lni-website", title:"Data me", url:"https://fahps.netlify.app"},
+    {icon:"lni lni-instagram-original", title:"Instagram", url:"https://instagram.com/Fahjoo_"},
+    {icon:"lni lni-game", title:"Roblox me", url:"https://www.roblox.com/users/3535224867/profile"},
+    {icon:"lni lni-discord", title:"Discord", url:"https://discord.gg/jKF94fgRVe"},
+    {icon:"lni lni-coffee-cup", title:"Trakteer", url:"https://trakteer.id/yamno"}
+  ];
+
+  /*========= RENDER LINK =========*/
+  const list=document.getElementById('linkList');
+  links.forEach((l,i)=>{
+    const a=document.createElement('a');
+    a.href=l.url;
+    a.target='_blank';
+    a.rel='noopener';
+    a.className='link-card fade-up';
+    a.style.animationDelay=(0.3+i*0.1)+'s';
+    a.innerHTML=`<i class="${l.icon}"></i><span class="link-title">${l.title}</span>`;
+    list.appendChild(a);
+  });
+
+  /*========= THEME TOGGLE =========*/
+  const body=document.body;
+  const toggle=document.getElementById('themeToggle');
+  const stored=localStorage.getItem('theme');
+  if(stored){ body.className=stored; }
+  else {
+    const prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+    body.className=prefersDark?'dark':'light';
+  }
+  toggle.onclick=()=>{
+    const next=body.className==='dark'?'light':'dark';
+    body.className=next;
+    localStorage.setItem('theme',next);
+  };
+
+  /*========= TAHUN =========*/
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  /*========= PARTICLES (RINGAN) =========*/
+  const canvas=document.getElementById('particles');
+  const ctx=canvas.getContext('2d');
+  let w=canvas.width=innerWidth;
+  let h=canvas.height=innerHeight;
+  const particles=[];
+  const opts={count:Math.floor(w/35),size:1.2,speed:.3,opacity:.35};
+  function rand(min,max){return Math.random()*(max-min)+min}
+  class P{
+    constructor(){this.x=rand(0,w);this.y=rand(0,h);this.vx=rand(-opts.speed,opts.speed);this.vy=rand(-opts.speed,opts.speed);}
+    update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w)this.vx*=-1;if(this.y<0||this.y>h)this.vy*=-1;}
+    draw(){ctx.beginPath();ctx.arc(this.x,this.y,opts.size,0,Math.PI*2);ctx.fillStyle=body.classList.contains('dark')?'rgba(167,139,250,opts.opacity)':'rgba(99,102,241,opts.opacity)';ctx.fill();}
+  }
+  function create(){for(let i=0;i<opts.count;i++)particles.push(new P());}
+  function animate(){ctx.clearRect(0,0,w,h);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}
+  create();animate();
+  addEventListener('resize',()=>{w=canvas.width=innerWidth;h=canvas.height=innerHeight;particles.length=0;create();});
+  </script>
+</body>
+</html>
